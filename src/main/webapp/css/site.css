@@ -1,0 +1,11 @@
+/* Shared styles for JSP views */
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 2rem; }
+.card { border: 1px solid #ddd; border-radius: 8px; padding: 1.25rem; max-width: 720px; }
+label { display: block; margin-top: 0.5rem; }
+input[type=text], input[type=password] { padding: 0.5rem; width: 100%; max-width: 320px; }
+button { margin-top: 0.75rem; padding: 0.5rem 0.75rem; }
+a { text-decoration: none; color: #0b5fff; }
+.caption { color: #666; font-size: 0.9rem; margin-top: 0.5rem; }
+.error { color: #b00020; margin-top: 0.5rem; }
+.note { color: #666; font-size: 0.9rem; }
+
