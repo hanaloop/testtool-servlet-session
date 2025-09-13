@@ -1,0 +1,46 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+hs_err_pid*
+
+# Java / Build
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+target/
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Jetty
+.jetty/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.factorypath
+
+# Editors
+.vscode/
+*.swp
+*.swo
+
+# Misc build dirs
+bin/
+out/
+build/
+
