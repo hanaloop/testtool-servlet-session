@@ -87,7 +87,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         // Redirect to home or a protected page (here: hello)
-        String redirectTo = req.getContextPath() + "/hello";
+        String redirectTo = req.getContextPath() + "/main";
         LOGGER.fine("Redirecting authenticated user '" + userId + "' to " + redirectTo);
         resp.sendRedirect(redirectTo);
     }

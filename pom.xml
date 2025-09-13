@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hanaloop.tool</groupId>
-    <artifactId>hello-servlet-jsp</artifactId>
+    <artifactId>hanaeco-session-servlet-test-tool</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Hello Servlet JSP (Jetty)</name>
-    <description>Plain Java Servlet Hello World with JSP view, Jetty, web.xml, Maven.</description>
+    <name>Hanaeco Session Servlet Test Tool (Jetty)</name>
+    <description>Hanaeco Servlet Test Tool. Jetty, web.xml, Maven.</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

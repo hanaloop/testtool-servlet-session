@@ -26,19 +26,19 @@ public class MainServlet extends HttpServlet {
             Object u = session.getAttribute("authUser");
             if (u instanceof User) {
                 name = ((User) u).getName();
-                LOGGER.fine("Hello page viewed by logged-in user: " + ((User) u).getUserId());
+                LOGGER.fine("Main page viewed by logged-in user: " + ((User) u).getUserId());
             }
         }
         if (name == null || name.isBlank()) {
             name = "World";
         }
 
-        LOGGER.fine("Rendering hello for name='" + name + "'");
+        LOGGER.fine("Rendering main for name='" + name + "'");
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         req.setAttribute("message", "Hello, " + name + "!");
         req.setAttribute("timestamp", timestamp);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/hello.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
         dispatcher.forward(req, resp);
     }
 }

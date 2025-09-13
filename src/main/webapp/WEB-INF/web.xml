@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <display-name>Hello Servlet JSP</display-name>
+    <display-name>Hanaeco Session Servlet Test Tool</display-name>
 
     <!-- Servlet declaration -->
     <servlet>
-        <servlet-name>helloServlet</servlet-name>
+        <servlet-name>mainServlet</servlet-name>
         <servlet-class>com.hanaloop.tool.MainServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -19,15 +19,26 @@
         <load-on-startup>2</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>com.hanaloop.tool.LogoutServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
     <!-- Servlet mapping -->
     <servlet-mapping>
-        <servlet-name>helloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>mainServlet</servlet-name>
+        <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <!-- Welcome file -->
