@@ -41,6 +41,12 @@
             <version>1.2</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- YAML parsing for user credential store -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,4 +74,3 @@
     </build>
 
 </project>
-

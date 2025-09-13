@@ -1,0 +1,14 @@
+users:
+  - userId: admin
+    password: admin123
+    name: System Administrator
+    role: ADMIN
+  - userId: alice
+    password: wonderland
+    name: Alice Liddell
+    role: USER
+  - userId: bob
+    password: builder
+    name: Bob Builder
+    role: USER
+

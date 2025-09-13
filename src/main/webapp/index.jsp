@@ -25,7 +25,8 @@
     </form>
 
     <p>Or try it directly: <a href="hello">/hello</a></p>
+    <hr/>
+    <p><a href="login">Login</a></p>
 </div>
 </body>
 </html>
-

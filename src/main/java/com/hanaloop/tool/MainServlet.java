@@ -5,15 +5,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import com.hanaloop.tool.auth.User;
 
 public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
+        // If logged in, prefer the user's name
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            Object u = session.getAttribute("authUser");
+            if (u instanceof User) {
+                name = ((User) u).getName();
+            }
+        }
         if (name == null || name.isBlank()) {
             name = "World";
         }
@@ -26,4 +36,3 @@ public class MainServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 }
-
