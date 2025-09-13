@@ -25,6 +25,12 @@
         <load-on-startup>3</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>sessionValidatorServlet</servlet-name>
+        <servlet-class>com.hanaloop.tool.SessionValidatorServlet</servlet-class>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+
     <!-- Servlet mapping -->
     <servlet-mapping>
         <servlet-name>mainServlet</servlet-name>
@@ -39,6 +45,11 @@
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>sessionValidatorServlet</servlet-name>
+        <url-pattern>/api/session</url-pattern>
     </servlet-mapping>
 
     <!-- Welcome file -->

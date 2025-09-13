@@ -1,31 +1,94 @@
 # Hanaeco Test Tool: Servlet Session
 
-Hanaeco Test Tool Servlet Session, using Jetty, `web.xml`, and Maven.
+Simple servlet/JSP app demonstrating session-based login plus a signed JWT cookie, using Jetty, `web.xml`, and Maven.
+
+## Features
+
+- Login form (`/login`) backed by YAML user store (`users.db.yml`).
+- Credential validation creates a 60-minute `HttpSession` with `authUser`.
+- Issues HS256 JWT cookie `el-token` (HttpOnly, `Secure` on HTTPS) signed with `JWT_SECRET`.
+- Optional `redirUrl` to control post-login redirect (app-relative only).
+- Logout endpoint (`/logout`) invalidates the session, clears cookies, and redirects to `redirUrl`.
+- Session validator API (`/api/session`) returns current user from session or JWT bearer/cookie.
 
 ## Requirements
 
 - Java 11+
 - Maven 3.8+
 
-## Run (dev)
+## Run
+
+Set a signing secret (for JWT) and run Jetty:
 
 ```bash
-mvn -q clean package
-mvn -q jetty:run
+export JWT_SECRET='dev-secret-change-me'
+mvn jetty:run
 ```
 
-Then open:
+Open:
 
-- http://localhost:8080/
-- http://localhost:8080/hello
+- Home: http://localhost:8080/
+- Main page: http://localhost:8080/main
+- Login: http://localhost:8080/login
+- Logout: http://localhost:8080/logout?redirUrl=/
+- Session API: http://localhost:8080/api/session
 
-You can pass a name: `http://localhost:8080/hello?name=Hanaloop`.
+Sample users live in `src/main/resources/users.db.yml` (userId/password):
+
+- `admin` / `admin123`
+- `alice` / `wonderland`
+- `bob` / `builder`
+
+## Usage Notes
+
+- Login success redirect:
+  - Defaults to `/main`.
+  - If `redirUrl` is provided (e.g., `/feature/x`), login redirects there.
+  - External URLs are ignored for safety; only app-relative (`/...`) are allowed.
+- JWT cookie `el-token` claims: `sub`, `iat`, `exp` (+60m), `aud=local`, `iss=local`.
+- The YAML loader accepts `users.db.yam`, `users.db.yml`, or `users.db.yaml` on the classpath.
+
+## API Examples
+
+Validate session via cookie or Authorization header:
+
+```bash
+# Using browser cookies (session or el-token) — just curl the endpoint when authenticated
+curl -i http://localhost:8080/api/session
+
+# Using bearer token
+curl -i -H "Authorization: Bearer <your-jwt>" http://localhost:8080/api/session
+```
+
+Successful response:
+
+```json
+{ "authenticated": true, "source": "session", "user": { "userId": "alice", "name": "Alice Liddell", "role": "USER" } }
+```
+
+Unauthenticated response:
+
+```json
+{ "authenticated": false, "reason": "not_authenticated" }
+```
 
 ## Project Layout
 
-- `pom.xml` — Maven config with Jetty plugin
-- `src/main/webapp/WEB-INF/web.xml` — Servlet routing (maps `/hello`)
-- `src/main/java/com/hanaloop/tool/HelloServlet.java` — Controller sets model and forwards to JSP
-- `src/main/webapp/WEB-INF/jsp/hello.jsp` — JSP view (not directly accessible)
-- `src/main/webapp/index.jsp` — Home page + form
+- `pom.xml` — Maven config and dependencies
+- `src/main/webapp/WEB-INF/web.xml` — Servlet routing
+- Servlets:
+  - `src/main/java/com/hanaloop/tool/MainServlet.java` — Renders main view
+  - `src/main/java/com/hanaloop/tool/LoginServlet.java` — Login flow + JWT issuance
+  - `src/main/java/com/hanaloop/tool/LogoutServlet.java` — Logout + redirect
+  - `src/main/java/com/hanaloop/tool/SessionValidatorServlet.java` — `/api/session`
+- Auth utils and store:
+  - `src/main/java/com/hanaloop/tool/auth/JwtUtil.java`
+  - `src/main/java/com/hanaloop/tool/auth/UserStore.java`
+  - `src/main/java/com/hanaloop/tool/auth/User.java`
+- Views:
+  - `src/main/webapp/index.jsp` — Home
+  - `src/main/webapp/WEB-INF/jsp/main.jsp` — Main page
+  - `src/main/webapp/WEB-INF/jsp/login.jsp` — Login form
+- Static assets:
+  - `src/main/webapp/css/site.css`
 
