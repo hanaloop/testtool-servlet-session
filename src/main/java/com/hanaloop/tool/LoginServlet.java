@@ -25,6 +25,12 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Pass through to login form JSP
         LOGGER.fine("GET /login from " + req.getRemoteAddr());
+        // If a redirection target is provided, preserve it for the POST
+        String redirParam = trim(req.getParameter("redirUrl"));
+        if (!redirParam.isEmpty()) {
+            req.setAttribute("redirUrl", redirParam);
+            LOGGER.fine("Login GET received redirUrl=" + redirParam);
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
         dispatcher.forward(req, resp);
     }
@@ -86,8 +92,19 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        // Redirect to home or a protected page (here: hello)
-        String redirectTo = req.getContextPath() + "/main";
+        // Redirect to main or to a provided redirUrl (app-relative only)
+        String redirParam = trim(req.getParameter("redirUrl"));
+        String redirectTo;
+        if (!redirParam.isEmpty()) {
+            // If caller already included contextPath, keep as-is; otherwise prefix it
+            if (redirParam.startsWith(req.getContextPath() + "/")) {
+                redirectTo = redirParam;
+            } else {
+                redirectTo = req.getContextPath() + redirParam;
+            }
+        } else {
+            redirectTo = req.getContextPath() + "/main";
+        }
         LOGGER.fine("Redirecting authenticated user '" + userId + "' to " + redirectTo);
         resp.sendRedirect(redirectTo);
     }

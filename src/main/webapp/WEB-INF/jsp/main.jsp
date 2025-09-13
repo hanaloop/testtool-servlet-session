@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,13 @@
 <div class="card">
     <h1>${message}</h1>
     <p class="caption">Rendered at: ${timestamp}</p>
-    <p><a href="/">Back to Home</a></p>
+    <p>
+        <a href="/">Back to Home</a>
+        <c:if test="${not empty sessionScope.authUser}">
+            |
+            <a href="${pageContext.request.contextPath}/logout?redirUrl=${pageContext.request.contextPath}/">Logout</a>
+        </c:if>
+    </p>
 </div>
 </body>
 </html>

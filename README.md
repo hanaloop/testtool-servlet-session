@@ -1,6 +1,6 @@
-# Hello Servlet JSP (Jetty)
+# Hanaeco Test Tool: Servlet Session
 
-Plain Java Servlet Hello World with JSP view, using Jetty, `web.xml`, and Maven.
+Hanaeco Test Tool Servlet Session, using Jetty, `web.xml`, and Maven.
 
 ## Requirements
 
