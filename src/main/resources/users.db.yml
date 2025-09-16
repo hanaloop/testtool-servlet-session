@@ -11,4 +11,8 @@ users:
     password: builder
     name: Bob Builder
     role: USER
+  - userId: local
+    password: password
+    name: user
+    role: ADMIN
 

@@ -1,5 +1,6 @@
 package com.hanaloop.tool;
 
+import com.hanaloop.tool.auth.HanaEcoSessionManager;
 import com.hanaloop.tool.auth.User;
 import com.hanaloop.tool.auth.UserStore;
 
@@ -9,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.hanaloop.tool.auth.JwtUtil;
 
 /**
  * LoginServlet handles login form display and login flow
@@ -74,19 +73,9 @@ public class LoginServlet extends HttpServlet {
         if (jwtSecret == null || jwtSecret.isEmpty()) {
             LOGGER.warning("JWT_SECRET not set; skipping el-token cookie issuance");
         } else {
-            long iat = System.currentTimeMillis() / 1000L;
-            long exp = iat + 60 * 60; // 60 minutes validity
             try {
-                String token = JwtUtil.generateElToken(matched.getUserId(), iat, exp, "local", "local", jwtSecret);
-                Cookie jwtCookie = new Cookie("el-token", token);
-                jwtCookie.setHttpOnly(true);
-                jwtCookie.setPath("/");
-                jwtCookie.setMaxAge(60 * 60);
-                if (req.isSecure()) {
-                    jwtCookie.setSecure(true);
-                }
-                resp.addCookie(jwtCookie);
-                LOGGER.fine("Issued el-token cookie for userId='" + matched.getUserId() + "' exp=" + exp);
+                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager();
+                sessionManager.addCookies(req, resp, userId, jwtSecret);
             } catch (Exception ex) {
                 LOGGER.log(Level.WARNING, "Failed to generate/sign el-token JWT", ex);
             }

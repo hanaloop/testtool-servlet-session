@@ -1,5 +1,7 @@
 package com.hanaloop.tool;
 
+import com.hanaloop.tool.auth.HanaEcoSessionManager;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -31,26 +33,8 @@ public class LogoutServlet extends HttpServlet {
             } catch (IllegalStateException ignore) {
             }
         }
-
-        // Remove el-token cookie
-        Cookie removed = new Cookie("el-token", "");
-        removed.setPath("/");
-        removed.setMaxAge(0);
-        removed.setHttpOnly(true);
-        if (req.isSecure()) {
-            removed.setSecure(true);
-        }
-        resp.addCookie(removed);
-
-        // Optionally also try to remove JSESSIONID (best-effort; container-managed)
-        Cookie killSessionId = new Cookie("JSESSIONID", "");
-        killSessionId.setPath(req.getContextPath().isEmpty() ? "/" : req.getContextPath());
-        killSessionId.setMaxAge(0);
-        killSessionId.setHttpOnly(true);
-        if (req.isSecure()) {
-            killSessionId.setSecure(true);
-        }
-        resp.addCookie(killSessionId);
+        HanaEcoSessionManager sessionManager = new HanaEcoSessionManager();
+        sessionManager.destroyCookies(req, resp);
 
         // Determine safe redirect URL
         String redir = req.getParameter("redirUrl");
