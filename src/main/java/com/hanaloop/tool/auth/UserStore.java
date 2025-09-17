@@ -15,6 +15,10 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is exemplify a repository to access a user db.
+ * In real project, you would use DAOs
+ */
 public class UserStore {
     private static final Logger LOGGER = Logger.getLogger(UserStore.class.getName());
     public static class UsersWrapper {
@@ -95,6 +99,7 @@ public class UserStore {
         List<User> users = loadUsers();
         if (users == null) return null;
         for (User u : users) {
+            LOGGER.fine("password" + password + " " + u.getPassword());
             if (Objects.equals(u.getUserId(), userId) && Objects.equals(u.getPassword(), password)) {
                 LOGGER.fine("Credential match for userId='" + userId + "'");
                 return u;

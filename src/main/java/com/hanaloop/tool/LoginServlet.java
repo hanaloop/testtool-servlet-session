@@ -20,15 +20,17 @@ import java.util.logging.Logger;
 public class LoginServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
 
+    private static final int COOKIE_MAX_AGE = 60 * 60; // 60 minutes
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Pass through to login form JSP
         LOGGER.fine("GET /login from " + req.getRemoteAddr());
         // If a redirection target is provided, preserve it for the POST
-        String redirParam = trim(req.getParameter("redirUrl"));
-        if (!redirParam.isEmpty()) {
-            req.setAttribute("redirUrl", redirParam);
-            LOGGER.fine("Login GET received redirUrl=" + redirParam);
+        String callbackUrl = trim(req.getParameter("callbackUrl"));
+        if (!callbackUrl.isEmpty()) {
+            req.setAttribute("callbackUrl", callbackUrl);
+            LOGGER.fine("Login GET received callbackUrl=" + callbackUrl);
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
         dispatcher.forward(req, resp);
@@ -70,26 +72,27 @@ public class LoginServlet extends HttpServlet {
 
         // Issue JWT cookie "el-token" signed with HS256 using env JWT_SECRET
         String jwtSecret = System.getenv("JWT_SECRET");
+        
         if (jwtSecret == null || jwtSecret.isEmpty()) {
             LOGGER.warning("JWT_SECRET not set; skipping el-token cookie issuance");
         } else {
             try {
-                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(true);
-                sessionManager.addCookies(req, resp, userId, jwtSecret);
+                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(jwtSecret, true);
+                sessionManager.addCookies(req, resp, matched, COOKIE_MAX_AGE);
             } catch (Exception ex) {
                 LOGGER.log(Level.WARNING, "Failed to generate/sign el-token JWT", ex);
             }
         }
 
-        // Redirect to main or to a provided redirUrl (app-relative only)
-        String redirParam = trim(req.getParameter("redirUrl"));
+        // Redirect to main or to a provided callbackUrl (app-relative only)
+        String callbackUrl = trim(req.getParameter("callbackUrl"));
         String redirectTo;
-        if (!redirParam.isEmpty()) {
+        if (!callbackUrl.isEmpty()) {
             // If caller already included contextPath, keep as-is; otherwise prefix it
-            if (redirParam.startsWith(req.getContextPath() + "/")) {
-                redirectTo = redirParam;
+            if (callbackUrl.startsWith(req.getContextPath() + "/")) {
+                redirectTo = callbackUrl;
             } else {
-                redirectTo = req.getContextPath() + redirParam;
+                redirectTo = req.getContextPath() + callbackUrl;
             }
         } else {
             redirectTo = req.getContextPath() + "/main";
@@ -102,3 +105,4 @@ public class LoginServlet extends HttpServlet {
         return v == null ? "" : v.trim();
     }
 }
+

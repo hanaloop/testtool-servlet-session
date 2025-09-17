@@ -3,7 +3,6 @@ package com.hanaloop.tool;
 import com.hanaloop.tool.auth.HanaEcoSessionManager;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,11 +32,12 @@ public class LogoutServlet extends HttpServlet {
             } catch (IllegalStateException ignore) {
             }
         }
-        HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(true);
+        String jwtSecret = System.getenv("JWT_SECRET");
+        HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(jwtSecret, true);
         sessionManager.destroyCookies(req, resp);
 
         // Determine safe redirect URL
-        String redir = req.getParameter("redirUrl");
+        String redir = req.getParameter("callbackUrl");
         if (redir == null || redir.isBlank() || !redir.startsWith("/")) {
             redir = req.getContextPath() + "/";
         }

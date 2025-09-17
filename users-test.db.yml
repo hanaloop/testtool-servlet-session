@@ -1,6 +1,6 @@
 users:
-  - userId: hana
-    password: hana1234
+  - userId: hnlp.one@gmail.com
+    password: hana123
     name: System Administrator
     role: ADMIN
 

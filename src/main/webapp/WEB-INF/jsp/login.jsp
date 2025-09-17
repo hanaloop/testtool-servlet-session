@@ -23,9 +23,9 @@
 <div class="card">
     <h1>Login</h1>
     <form action="${pageContext.request.contextPath}/login" method="post">
-        <c:set var="redirVal" value="${empty param.redirUrl ? requestScope.redirUrl : param.redirUrl}" />
-        <c:if test="${not empty redirVal}">
-            <input type="hidden" name="redirUrl" value="${fn:escapeXml(redirVal)}" />
+        <c:set var="callbackUrl" value="${empty param.callbackUrl ? requestScope.callbackUrl : param.callbackUrl}" />
+        <c:if test="${not empty callbackUrl}">
+            <input type="hidden" name="callbackUrl" value="${fn:escapeXml(callbackUrl)}" />
         </c:if>
         <label for="userId">User ID:</label>
         <input type="text" id="userId" name="userId" value="${fn:escapeXml(param.userId != null ? param.userId : (requestScope.userId != null ? requestScope.userId : ''))}" />

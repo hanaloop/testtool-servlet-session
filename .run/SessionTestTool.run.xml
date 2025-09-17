@@ -7,7 +7,7 @@
           <option name="delegateBuildToMaven" value="false" />
           <option name="environmentProperties">
             <map>
-              <entry key="JWT_SECRET" value="MY_SECRET" />
+              <entry key="JWT_SECRET" value="38864050d46fd2571bdf89a39e4fd00e59e618bf646d310da731201876609e28" />
               <entry key="USER_STORE_FILE" value="./users-test.db.yml" />
             </map>
           </option>

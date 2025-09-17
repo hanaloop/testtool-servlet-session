@@ -1,10 +1,14 @@
 package com.hanaloop.tool.auth;
 
+/**
+ * User class with minimum set of information to be stored in JWT
+ */
 public class User {
     private String userId;
     private String password;
     private String name;
     private String role;
+    private String email;
 
     public User() {
     }
@@ -29,6 +33,14 @@ public class User {
         return name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
