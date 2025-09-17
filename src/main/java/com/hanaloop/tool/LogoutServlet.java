@@ -37,7 +37,7 @@ public class LogoutServlet extends HttpServlet {
         sessionManager.destroyCookies(req, resp);
 
         // Determine safe redirect URL
-        String redir = req.getParameter("redirUrl");
+        String redir = req.getParameter("callbackUrl");
         if (redir == null || redir.isBlank() || !redir.startsWith("/")) {
             redir = req.getContextPath() + "/";
         }

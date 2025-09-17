@@ -26,7 +26,7 @@
     <p>
         <c:choose>
             <c:when test="${not empty sessionScope.authUser}">
-                <a href="${pageContext.request.contextPath}/logout?redirUrl=${pageContext.request.contextPath}/">Logout</a>
+                <a href="${pageContext.request.contextPath}/logout?callbackUrl=${pageContext.request.contextPath}/">Logout</a>
             </c:when>
             <c:otherwise>
                 <a href="login">Login</a>

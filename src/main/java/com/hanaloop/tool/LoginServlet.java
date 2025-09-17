@@ -27,10 +27,10 @@ public class LoginServlet extends HttpServlet {
         // Pass through to login form JSP
         LOGGER.fine("GET /login from " + req.getRemoteAddr());
         // If a redirection target is provided, preserve it for the POST
-        String redirParam = trim(req.getParameter("redirUrl"));
-        if (!redirParam.isEmpty()) {
-            req.setAttribute("redirUrl", redirParam);
-            LOGGER.fine("Login GET received redirUrl=" + redirParam);
+        String callbackUrl = trim(req.getParameter("callbackUrl"));
+        if (!callbackUrl.isEmpty()) {
+            req.setAttribute("callbackUrl", callbackUrl);
+            LOGGER.fine("Login GET received callbackUrl=" + callbackUrl);
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
         dispatcher.forward(req, resp);
@@ -84,15 +84,15 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        // Redirect to main or to a provided redirUrl (app-relative only)
-        String redirParam = trim(req.getParameter("redirUrl"));
+        // Redirect to main or to a provided callbackUrl (app-relative only)
+        String callbackUrl = trim(req.getParameter("callbackUrl"));
         String redirectTo;
-        if (!redirParam.isEmpty()) {
+        if (!callbackUrl.isEmpty()) {
             // If caller already included contextPath, keep as-is; otherwise prefix it
-            if (redirParam.startsWith(req.getContextPath() + "/")) {
-                redirectTo = redirParam;
+            if (callbackUrl.startsWith(req.getContextPath() + "/")) {
+                redirectTo = callbackUrl;
             } else {
-                redirectTo = req.getContextPath() + redirParam;
+                redirectTo = req.getContextPath() + callbackUrl;
             }
         } else {
             redirectTo = req.getContextPath() + "/main";

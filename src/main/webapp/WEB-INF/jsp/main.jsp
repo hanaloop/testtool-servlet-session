@@ -35,7 +35,7 @@
         <a href="/">Back to Home</a>
         <c:if test="${not empty sessionScope.authUser}">
             |
-            <a href="${pageContext.request.contextPath}/logout?redirUrl=${pageContext.request.contextPath}/">Logout</a>
+            <a href="${pageContext.request.contextPath}/logout?callbackUrl=${pageContext.request.contextPath}/">Logout</a>
         </c:if>
     </p>
 </div>

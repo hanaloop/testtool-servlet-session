@@ -7,8 +7,8 @@ Simple servlet/JSP app demonstrating session-based login plus a signed JWT cooki
 - Login form (`/login`) backed by YAML user store (`users.db.yml`).
 - Credential validation creates a 60-minute `HttpSession` with `authUser`.
 - Issues HS256 JWT cookie `el-token` (HttpOnly, `Secure` on HTTPS) signed with `JWT_SECRET`.
-- Optional `redirUrl` to control post-login redirect (app-relative only).
-- Logout endpoint (`/logout`) invalidates the session, clears cookies, and redirects to `redirUrl`.
+- Optional `callbackUrl` to control post-login redirect (app-relative only).
+- Logout endpoint (`/logout`) invalidates the session, clears cookies, and redirects to `callbackUrl`.
 - Session validator API (`/api/session`) returns current user from session or JWT bearer/cookie.
 
 ## Requirements
@@ -30,7 +30,7 @@ Open:
 - Home: http://localhost:8080/
 - Main page: http://localhost:8080/main
 - Login: http://localhost:8080/login
-- Logout: http://localhost:8080/logout?redirUrl=/
+- Logout: http://localhost:8080/logout?callbackUrl=/
 - Session API: http://localhost:8080/api/session
 
 Sample users live in `src/main/resources/users.db.yml` (userId/password):
@@ -43,7 +43,7 @@ Sample users live in `src/main/resources/users.db.yml` (userId/password):
 
 - Login success redirect:
   - Defaults to `/main`.
-  - If `redirUrl` is provided (e.g., `/feature/x`), login redirects there.
+  - If `callbackUrl` is provided (e.g., `/feature/x`), login redirects there.
   - External URLs are ignored for safety; only app-relative (`/...`) are allowed.
 - JWT cookie `el-token` claims: `sub`, `iat`, `exp` (+60m), `aud=local`, `iss=local`.
 - The YAML loader accepts `users.db.yam`, `users.db.yml`, or `users.db.yaml` on the classpath.
