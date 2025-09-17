@@ -1,0 +1,6 @@
+users:
+  - userId: hana
+    password: hana1234
+    name: System Administrator
+    role: ADMIN
+

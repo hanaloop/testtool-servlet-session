@@ -8,6 +8,7 @@
           <option name="environmentProperties">
             <map>
               <entry key="JWT_SECRET" value="MY_SECRET" />
+              <entry key="USER_STORE_FILE" value="./users-test.db.yml" />
             </map>
           </option>
           <option name="jreName" value="#USE_PROJECT_JDK" />
