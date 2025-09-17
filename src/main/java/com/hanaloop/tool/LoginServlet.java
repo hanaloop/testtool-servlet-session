@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.hanaloop.tool.auth.HanaEcoSessionManager;
+import com.hanaloop.tool.auth.JwtUtil;
+
 /**
  * LoginServlet handles login form display and login flow
  */
@@ -75,7 +78,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             try {
                 HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(true);
-                sessionManager.addCookies(req, resp, userId, jwtSecret);
+                sessionManager.addCookies(req, resp, matched, jwtSecret);
             } catch (Exception ex) {
                 LOGGER.log(Level.WARNING, "Failed to generate/sign el-token JWT", ex);
             }
@@ -102,3 +105,4 @@ public class LoginServlet extends HttpServlet {
         return v == null ? "" : v.trim();
     }
 }
+

@@ -3,16 +3,19 @@ users:
     password: admin123
     name: System Administrator
     role: ADMIN
+    email: user@example.com
   - userId: alice
     password: wonderland
     name: Alice Liddell
     role: USER
+    email: alice@example.com
   - userId: bob
     password: builder
     name: Bob Builder
     role: USER
+    email: bob@example.com
   - userId: local
     password: password
     name: user
     role: ADMIN
-
+    email: local@hanaloop.com

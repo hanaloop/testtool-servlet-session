@@ -95,6 +95,7 @@ public class UserStore {
         List<User> users = loadUsers();
         if (users == null) return null;
         for (User u : users) {
+            LOGGER.fine("password" + password + " " + u.getPassword());
             if (Objects.equals(u.getUserId(), userId) && Objects.equals(u.getPassword(), password)) {
                 LOGGER.fine("Credential match for userId='" + userId + "'");
                 return u;
