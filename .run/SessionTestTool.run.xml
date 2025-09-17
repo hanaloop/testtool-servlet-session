@@ -7,7 +7,8 @@
           <option name="delegateBuildToMaven" value="false" />
           <option name="environmentProperties">
             <map>
-              <entry key="JWT_SECRET" value="" />
+              <entry key="JWT_SECRET" value="MY_SECRET" />
+              <entry key="USER_STORE_FILE" value="./users-test.db.yml" />
             </map>
           </option>
           <option name="jreName" value="#USE_PROJECT_JDK" />
@@ -27,8 +28,6 @@
           </option>
           <option name="goals">
             <list>
-              <option value="clean" />
-              <option value="package" />
               <option value="jetty:run" />
             </list>
           </option>
