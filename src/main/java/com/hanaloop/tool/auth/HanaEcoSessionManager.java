@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Logger;
 
+/**
+ * Object of this class manages
+ */
 public class HanaEcoSessionManager {
     private static final Logger LOGGER = Logger.getLogger(HanaEcoSessionManager.class.getName());
 
@@ -13,6 +16,12 @@ public class HanaEcoSessionManager {
     private static final String COOKIE_NEXT_AUTH_SECURE = "__Secure-next-auth.session-token";
     private static final String COOKIE_JSESSIONID = "JSESSIONID";
     private static final int COOKIE_MAX_AGE = 60 * 60; // 60 minutes
+
+    private boolean handleJsession = false;
+
+    public HanaEcoSessionManager(boolean useJsession) {
+        this.handleJsession = useJsession;
+    }
 
     /**
      * Issues cookies for session authentication.
@@ -41,16 +50,19 @@ public class HanaEcoSessionManager {
     public void destroyCookies(HttpServletRequest req, HttpServletResponse resp) {
         boolean isSecure = req.isSecure();
 
-        // Remove issued cookies
+        // Remove issued cookies. Cookie removal is setting cookie with immediate expiration.
         resp.addCookie(removeCookie(COOKIE_EL_TOKEN, isSecure));
         resp.addCookie(removeCookie(COOKIE_NEXT_AUTH, isSecure));
         resp.addCookie(removeCookie(COOKIE_NEXT_AUTH_SECURE, isSecure));
-
-        // Best-effort removal of JSESSIONID
-        String sessionPath = req.getContextPath().isEmpty() ? "/" : req.getContextPath();
-        resp.addCookie(removeCookie(COOKIE_JSESSIONID, isSecure, sessionPath));
-
         LOGGER.fine("Destroyed authentication cookies");
+
+        if (this.handleJsession) {
+            // Best-effort removal of JSESSIONID
+            String sessionPath = req.getContextPath().isEmpty() ? "/" : req.getContextPath();
+            resp.addCookie(removeCookie(COOKIE_JSESSIONID, isSecure, sessionPath));
+            LOGGER.fine("Destroyed JSESSION cookie");
+        }
+
     }
 
     /**

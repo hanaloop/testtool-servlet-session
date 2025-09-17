@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
             } catch (IllegalStateException ignore) {
             }
         }
-        HanaEcoSessionManager sessionManager = new HanaEcoSessionManager();
+        HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(true);
         sessionManager.destroyCookies(req, resp);
 
         // Determine safe redirect URL

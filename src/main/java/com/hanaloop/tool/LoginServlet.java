@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             LOGGER.warning("JWT_SECRET not set; skipping el-token cookie issuance");
         } else {
             try {
-                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager();
+                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(true);
                 sessionManager.addCookies(req, resp, userId, jwtSecret);
             } catch (Exception ex) {
                 LOGGER.log(Level.WARNING, "Failed to generate/sign el-token JWT", ex);

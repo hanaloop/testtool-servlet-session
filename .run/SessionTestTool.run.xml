@@ -7,7 +7,7 @@
           <option name="delegateBuildToMaven" value="false" />
           <option name="environmentProperties">
             <map>
-              <entry key="JWT_SECRET" value="" />
+              <entry key="JWT_SECRET" value="MY_SECRET" />
             </map>
           </option>
           <option name="jreName" value="#USE_PROJECT_JDK" />
@@ -15,13 +15,13 @@
             <map />
           </option>
           <option name="passParentEnv" value="true" />
-          <option name="runMavenInBackground" value="true" />
           <option name="skipTests" value="false" />
           <option name="vmOptions" value="" />
         </MavenRunnerSettings>
       </option>
       <option name="myRunnerParameters">
         <MavenRunnerParameters>
+          <option name="cmdOptions" />
           <option name="profiles">
             <set />
           </option>
@@ -30,9 +30,13 @@
               <option value="jetty:run" />
             </list>
           </option>
+          <option name="multimoduleDir" />
           <option name="pomFileName" />
           <option name="profilesMap">
             <map />
+          </option>
+          <option name="projectsCmdOptionValues">
+            <list />
           </option>
           <option name="resolveToWorkspace" value="false" />
           <option name="workingDirPath" value="$PROJECT_DIR$" />
