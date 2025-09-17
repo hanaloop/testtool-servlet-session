@@ -14,14 +14,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.hanaloop.tool.auth.HanaEcoSessionManager;
-import com.hanaloop.tool.auth.JwtUtil;
-
 /**
  * LoginServlet handles login form display and login flow
  */
 public class LoginServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(LoginServlet.class.getName());
+
+    private static final int COOKIE_MAX_AGE = 60 * 60; // 60 minutes
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -73,12 +72,13 @@ public class LoginServlet extends HttpServlet {
 
         // Issue JWT cookie "el-token" signed with HS256 using env JWT_SECRET
         String jwtSecret = System.getenv("JWT_SECRET");
+        
         if (jwtSecret == null || jwtSecret.isEmpty()) {
             LOGGER.warning("JWT_SECRET not set; skipping el-token cookie issuance");
         } else {
             try {
-                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(true);
-                sessionManager.addCookies(req, resp, matched, jwtSecret);
+                HanaEcoSessionManager sessionManager = new HanaEcoSessionManager(jwtSecret, true);
+                sessionManager.addCookies(req, resp, matched, COOKIE_MAX_AGE);
             } catch (Exception ex) {
                 LOGGER.log(Level.WARNING, "Failed to generate/sign el-token JWT", ex);
             }

@@ -15,6 +15,10 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is exemplify a repository to access a user db.
+ * In real project, you would use DAOs
+ */
 public class UserStore {
     private static final Logger LOGGER = Logger.getLogger(UserStore.class.getName());
     public static class UsersWrapper {

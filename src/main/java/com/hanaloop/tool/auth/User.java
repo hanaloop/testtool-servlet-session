@@ -1,5 +1,8 @@
 package com.hanaloop.tool.auth;
 
+/**
+ * User class with minimum set of information to be stored in JWT
+ */
 public class User {
     private String userId;
     private String password;
