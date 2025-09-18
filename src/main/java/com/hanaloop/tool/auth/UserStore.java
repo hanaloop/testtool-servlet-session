@@ -49,7 +49,7 @@ public class UserStore {
         
         // 1) Try external file if specified
         String externalPath = System.getenv(ENV_USER_DB_FILE);
-        if (externalPath != null && !externalPath.isBlank()) {
+        if (externalPath != null && !externalPath.trim().isEmpty()) {
             File extFile = new File(externalPath);
             try (InputStream in = new FileInputStream(extFile)) {
 

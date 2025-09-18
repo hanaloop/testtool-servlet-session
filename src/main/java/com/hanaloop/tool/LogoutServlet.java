@@ -38,7 +38,7 @@ public class LogoutServlet extends HttpServlet {
 
         // Determine safe redirect URL
         String redir = req.getParameter("callbackUrl");
-        if (redir == null || redir.isBlank() || !redir.startsWith("/")) {
+        if (redir == null || redir.trim().isEmpty() || !redir.startsWith("/")) {
             redir = req.getContextPath() + "/";
         }
         LOGGER.fine("Logout redirecting to: " + redir);
