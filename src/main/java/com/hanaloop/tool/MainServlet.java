@@ -29,7 +29,7 @@ public class MainServlet extends HttpServlet {
                 LOGGER.fine("Main page viewed by logged-in user: " + ((User) u).getUserId());
             }
         }
-        if (name == null || name.isBlank()) {
+        if (name == null || name.trim().isEmpty()) {
             name = "World";
         }
 

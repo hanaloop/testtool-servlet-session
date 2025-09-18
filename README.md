@@ -16,17 +16,32 @@ Simple servlet/JSP app demonstrating session-based login plus a signed JWT cooki
 - Java 11+
 - Maven 3.8+
 
-## Run
+## Build & Run
 
-Set a signing secret (for JWT) and run Jetty:
-
-```bash
-export JWT_SECRET='dev-secret-change-me'
-mvn jetty:run
+### Build
+```sh
+# Package will create a jar file within ./target folder
+mvn -Pexec-jar clean package
 ```
 
-Open:
+### Configure: Set a signing secret (for JWT) and run Jetty:
 
+```sh
+export JWT_SECRET='dev-secret-change-me'
+```
+
+
+### Run
+```sh
+# To run the jar
+java -jar ./target/hanaeco-session-servlet-test-tool-1.0.0-SNAPSHOT-exec.jar
+```
+
+> In, intellij it can be run as war on top of jetty `mvn jetty:run`
+
+### Test
+
+Open:
 - Home: http://localhost:8080/
 - Main page: http://localhost:8080/main
 - Login: http://localhost:8080/login
