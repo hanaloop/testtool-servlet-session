@@ -36,7 +36,7 @@ public final class JwtUtil {
         return sb.toString();
     }
 
-    public static String generateElToken(String userId, long iat, long exp, String aud, String iss, String secret) throws Exception {
+    public static String generateElToken(String userId, long iat, long exp, String aud, String iss, String flow, String context, String secret) throws Exception {
         String headerJson = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}";
         String payloadJson = new StringBuilder(128)
                 .append('{')
@@ -45,6 +45,8 @@ public final class JwtUtil {
                 .append(',').append("\"exp\":").append(exp)
                 .append(',').append("\"aud\":\"").append(jsonEscape(aud)).append('\"')
                 .append(',').append("\"iss\":\"").append(jsonEscape(iss)).append('\"')
+
+                .append(',').append("\"hana\": { \"flow\":\"").append(jsonEscape(flow)).append("\", \"context\":\"").append(jsonEscape(context)).append("\"}")
                 .append('}')
                 .toString();
 

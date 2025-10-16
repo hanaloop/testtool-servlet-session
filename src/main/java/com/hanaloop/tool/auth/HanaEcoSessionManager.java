@@ -76,6 +76,8 @@ public class HanaEcoSessionManager {
                 expiresAt,
                 SESSION_AUDIENCE,
                 SESSION_ISSUER,
+                "fta",
+                "company-cd",
                 this.secret);
 
         // Add the el-token cookie
