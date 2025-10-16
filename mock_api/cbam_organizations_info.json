@@ -1,0 +1,18 @@
+{
+  "data": {
+    "CMPN_CD": "C0001",
+    "CMPN_CORP_NM": "(주)더미상사",
+    "CMPN_CORP_NM_EN": "DUMMY CORP",
+    "CMPN_TXPR_BMEN_NO": "123-45-67890",
+    "CMPN_RPST_NM": "홍길동",
+    "CMPN_TEL_NO": "02-1111-2222",
+    "CMPN_FAX_NO": "02-1111-2223",
+    "CMPN_MAIL": "contact@dummycorp.com",
+    "CMPN_ZIP_CODE": "04513",
+    "CMPN_ADDR": "서울특별시 중구 세종대로 110",
+    "CMPN_ADDR_EN": "110, Sejong-daero, Jung-gu, Seoul",
+    "CMPN_NA": "KR",
+    "CMPN_CATEGORY_CD": null,
+    "STATE_CD": "2"
+  }
+}

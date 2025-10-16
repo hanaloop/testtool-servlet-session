@@ -4,12 +4,21 @@ Simple servlet/JSP app demonstrating session-based login plus a signed JWT cooki
 
 ## Features
 
+### Session related features
 - Login form (`/login`) backed by YAML user store (`users.db.yml`).
 - Credential validation creates a 60-minute `HttpSession` with `authUser`.
 - Issues HS256 JWT cookie `el-token` (HttpOnly, `Secure` on HTTPS) signed with `JWT_SECRET`.
 - Optional `callbackUrl` to control post-login redirect (app-relative only).
 - Logout endpoint (`/logout`) invalidates the session, clears cookies, and redirects to `callbackUrl`.
 - Session validator API (`/api/session`) returns current user from session or JWT bearer/cookie.
+
+### Mock API related features
+
+By adding a file in the folder specified by the `MOCK_API_FOLDER` env, it is possible to make a GET request which returns the payload as defined in the file content.
+
+See sample files under /mock_api folder
+
+
 
 ## Requirements
 

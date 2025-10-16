@@ -8,6 +8,7 @@
           <option name="environmentProperties">
             <map>
               <entry key="JWT_SECRET" value="SomeFancySecret" />
+              <entry key="MOCK_API_FOLDER" value="mock_api" />
               <entry key="USER_STORE_FILE" value="./users-test.db.yml" />
             </map>
           </option>

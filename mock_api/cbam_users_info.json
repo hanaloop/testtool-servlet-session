@@ -1,0 +1,14 @@
+{
+  "data": {
+    "USER_ID": "admin_dummy",
+    "USER_NM": "김관리",
+    "EMAIL": "admin_kim@dummycorp.com",
+    "USER_TYPE": "S",
+    "REG_DT": null,
+    "MDF_DT": null,
+    "REG_USER_ID": null,
+    "MDF_USER_ID": null,
+    "USER_NM_EN": null,
+    "DUTY_EN": null
+  }
+}
