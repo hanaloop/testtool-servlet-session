@@ -1,14 +1,15 @@
 {
   "data": {
-    "USER_ID": "admin_dummy",
-    "USER_NM": "김관리",
-    "EMAIL": "admin_kim@dummycorp.com",
+    "USER_ID": "fta01",
+    "USER_NM": "홍길동",
+    "EMAIL": "fta01@ftatest.com",
     "USER_TYPE": "S",
-    "REG_DT": null,
-    "MDF_DT": null,
+    "REG_DT": "2025-01-02T14:00:00",
+    "MDF_DT": "2025-01-03T14:00:00",
     "REG_USER_ID": null,
     "MDF_USER_ID": null,
-    "USER_NM_EN": null,
-    "DUTY_EN": null
+    "USER_NM_EN": "Kildong Hong",
+    "TEL": "123-456",
+    "DUTY_EN": "manager"
   }
 }
