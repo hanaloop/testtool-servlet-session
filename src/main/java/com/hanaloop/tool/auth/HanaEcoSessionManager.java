@@ -72,7 +72,7 @@ public class HanaEcoSessionManager {
         String companyCd = "fta01";
         // Generate access token for el-token cookie
         String accessToken = JwtUtil.generateElToken(
-                companyCd + "/" + user.getUserId(),
+                user.getUserId(),
                 issuedAt,
                 expiresAt,
                 SESSION_AUDIENCE,
