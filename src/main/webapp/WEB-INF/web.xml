@@ -31,6 +31,12 @@
         <load-on-startup>4</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>mockResponseServlet</servlet-name>
+        <servlet-class>com.hanaloop.tool.MockResponseServlet</servlet-class>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+
     <!-- Servlet mapping -->
     <servlet-mapping>
         <servlet-name>mainServlet</servlet-name>
@@ -50,6 +56,11 @@
     <servlet-mapping>
         <servlet-name>sessionValidatorServlet</servlet-name>
         <url-pattern>/api/session</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>mockResponseServlet</servlet-name>
+        <url-pattern>/mock/*</url-pattern>
     </servlet-mapping>
 
     <!-- Welcome file -->

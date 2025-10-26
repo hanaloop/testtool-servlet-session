@@ -3,4 +3,8 @@ users:
     password: hana123
     name: System Administrator
     role: ADMIN
+  - userId: fta01
+    password: fta01
+    name: fta01
+    role: ADMIN
 

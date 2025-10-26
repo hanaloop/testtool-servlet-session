@@ -69,6 +69,7 @@ public class HanaEcoSessionManager {
         long issuedAt = System.currentTimeMillis() / 1000L;
         long expiresAt = issuedAt + cookieDurationSeconds;
 
+        String companyCd = "fta01";
         // Generate access token for el-token cookie
         String accessToken = JwtUtil.generateElToken(
                 user.getUserId(),
@@ -76,6 +77,8 @@ public class HanaEcoSessionManager {
                 expiresAt,
                 SESSION_AUDIENCE,
                 SESSION_ISSUER,
+                "fta",
+                companyCd,
                 this.secret);
 
         // Add the el-token cookie
